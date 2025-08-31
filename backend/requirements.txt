@@ -1,1 +1,9 @@
-
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+openai-whisper==20231117
+ffmpeg-python==0.2.0
+python-dotenv==1.0.0
+gunicorn==21.2.0
+httpx==0.25.1
+pydantic==2.5.0
