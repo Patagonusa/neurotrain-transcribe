@@ -107,7 +107,20 @@ async def transcribe_audio(
             language=language,
             fp16=False  # Disable FP16 for CPU on Render
         )
-        
+        # Transcribe function
+        def transcribe_voice_note(audio_path):
+        result = model.transcribe(
+        audio_path,
+        fp16=False,  # Disable for CPU (Render free tier)
+        language=None,  # Auto-detect language
+        task="transcribe"  # or "translate" to English
+        ) 
+    
+    return {
+        "text": result["text"],
+        "language": result["language"],
+        "segments": result["segments"],  # Timestamps
+    }
         text = result["text"].strip()
         detected_language = result.get("language", "unknown")
         
