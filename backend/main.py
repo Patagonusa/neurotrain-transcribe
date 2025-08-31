@@ -29,9 +29,9 @@ app.add_middleware(
 )
 
 # Load Whisper model on startup
-MODEL_SIZE = os.getenv("WHISPER_MODEL", "base")
-logger.info(f"Loading Whisper model: {MODEL_SIZE}")
-model = whisper.load_model(MODEL_SIZE)
+MODEL_SIZE = os.getenv("tiny", "base")
+logger.info(f"Loading Whisper model: {tiny}")
+model = whisper.load_model(tiny)
 
 class TranscriptionResponse(BaseModel):
     transcript: str
@@ -49,14 +49,14 @@ class HealthResponse(BaseModel):
 async def root():
     return HealthResponse(
         status="healthy",
-        model=MODEL_SIZE
+        model=tiny
     )
 
 @app.get("/health", response_model=HealthResponse)
 async def health():
     return HealthResponse(
         status="healthy",
-        model=MODEL_SIZE
+        model=tiny
     )
 
 @app.post("/transcribe", response_model=TranscriptionResponse)
